@@ -1,9 +1,5 @@
-[ComponentEditorProps(category: "EveronLife/Feature/Character/Spawning", description: "Part of the re-spawn system on the gamemode.")]
-class EL_RespawnSystemComponentClass : EPF_BaseRespawnSystemComponentClass
-{
-}
-
-class EL_RespawnSystemComponent : EPF_BaseRespawnSystemComponent
+[BaseContainerProps()]
+class EL_SpawnLogic : EPF_BaseSpawnLogic
 {
 	[Attribute(category: "New character defaults")]
 	protected ref array<ResourceName> m_aDefaultCharacterPrefabs;
