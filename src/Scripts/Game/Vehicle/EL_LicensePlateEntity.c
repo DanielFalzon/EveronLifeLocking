@@ -21,6 +21,7 @@ class EL_LicensePlateEntity : GenericEntity
 	TextWidget m_TextWidget;
 	EL_LicensePlateManagerComponent m_LicensePlateManager;
 	
+	/*
 	void EL_LicensePlateEntity(IEntitySource src, IEntity parent)
 	{
 		SetEventMask(EntityEvent.FRAME);
@@ -63,4 +64,5 @@ class EL_LicensePlateEntity : GenericEntity
 		
 		m_wRenderTargetTextureWidget.SetGUIWidget(this, m_MaterialIndex);
 	}
+	*/
 };
