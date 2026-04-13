@@ -14,16 +14,14 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent {
 	bool m_IsLocked = true;
 	
 	
-	void EL_VehicleLockComponent() {
-		if (m_DebugIdentifier != "")
-			m_VehicleIdentifier = m_DebugIdentifier;
-		
-		
-		//Testing
-		//auto inventoryManager = InventoryStorageManagerComponent.Cast(this.GetOwner().FindComponent(InventoryStorageManagerComponent));
-		
-		//inventoryManager.SetInventoryLocked(true);
-	}
+	override void EOnInit(IEntity owner)
+    {
+        super.EOnInit(owner);
+        
+        if (m_DebugIdentifier != "")
+            m_VehicleIdentifier = m_DebugIdentifier;
+    }
+    
 	
 	override bool IsLocked(IEntity user, BaseCompartmentSlot compartmentSlot)
 	{
