@@ -10,9 +10,12 @@ class EL_VehicleKeyComponent : ScriptComponent {
 	[RplProp()]
 	string m_VehicleIdentifier;
 	
-	void EL_VehicleKeyComponent() {
-		if (m_DebugIdentifier != "")
+	override void EOnInit(IEntity owner)
+    {
+        super.EOnInit(owner);
+        
+        if (m_DebugIdentifier != "")
 			m_VehicleIdentifier = m_DebugIdentifier;
-	}
-	
+    }
 }
+
