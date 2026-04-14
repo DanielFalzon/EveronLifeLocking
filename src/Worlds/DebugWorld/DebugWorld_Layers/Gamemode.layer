@@ -2,5 +2,9 @@ EL_GameModeRoleplay : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Role
 }
 EPF_SpawnPoint : "{260C1BEFBF9AA86B}Prefabs/MP/Spawn/SpawnPoint_LIFE.et" {
  coords 110 0 137.516
- angleY 180
+ angles 0 180 0
+}
+GenericEntity VehicleKey_691D3D2DF78C7958 : "{2C55945E5BAB108E}Prefabs/Items/Keys/VehicleKey.et" {
+ coords 101.754 0.285 137.491
+ angles 0 0 0
 }

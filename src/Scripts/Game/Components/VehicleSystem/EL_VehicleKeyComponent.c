@@ -1,21 +1,29 @@
-class EL_VehicleKeyComponentClass : ScriptComponentClass {
-
+[ComponentEditorProps(category: "EveronLife/Feature/Vehicles", description: "Identifies which vehicle this key belongs to.")]
+class EL_VehicleKeyComponentClass : ScriptComponentClass
+{
 }
 
-class EL_VehicleKeyComponent : ScriptComponent {
-	
-	[Attribute("Debug Identifier")]
-	string m_DebugIdentifier;
-	
+class EL_VehicleKeyComponent : ScriptComponent
+{
+	[Attribute("")]
+	protected string m_sDebugIdentifier;
+
 	[RplProp()]
-	string m_VehicleIdentifier;
-	
-	override void EOnInit(IEntity owner)
-    {
-        super.EOnInit(owner);
-        
-        if (m_DebugIdentifier != "")
-			m_VehicleIdentifier = m_DebugIdentifier;
-    }
-}
+	protected string m_sVehicleIdentifier;
 
+	//------------------------------------------------------------------------------------------------
+	string GetVehicleIdentifier()
+	{
+		return m_sVehicleIdentifier;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	override void EOnInit(IEntity owner)
+	{
+		super.EOnInit(owner);
+
+
+		if (m_sDebugIdentifier != "")
+			m_sVehicleIdentifier = m_sDebugIdentifier;
+	}
+}
