@@ -16,9 +16,11 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent
 	{
 		super.EOnInit(owner);
 
-		if (m_sDebugIdentifier != "")
+		if (m_sDebugIdentifier != ""){
 			m_sVehicleIdentifier = m_sDebugIdentifier;
-
+		}
+			
+		
 		SetLocked(true);
 	}
 
@@ -38,10 +40,14 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent
 	override bool IsLocked(IEntity user, BaseCompartmentSlot compartmentSlot)
 	{
 		CharacterControllerComponent characterController = CharacterControllerComponent.Cast(user.FindComponent(CharacterControllerComponent));
-		if (characterController && IsValidKey(characterController.GetAttachedGadgetAtLeftHandSlot()))
-			return false;
+		
+		IEntity	m_AttachedGadgetAtLeft = characterController.GetAttachedGadgetAtLeftHandSlot();
+		
+		if (characterController && (m_AttachedGadgetAtLeft != null))
+			return !IsValidKey(m_AttachedGadgetAtLeft);
 
 		SCR_InventoryStorageManagerComponent inventoryManager = SCR_InventoryStorageManagerComponent.Cast(user.FindComponent(SCR_InventoryStorageManagerComponent));
+		
 		if (!inventoryManager)
 			return true;
 
@@ -70,8 +76,12 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent
 	//------------------------------------------------------------------------------------------------
 	bool IsValidKey(IEntity key)
 	{
+		if(key == null)
+			return false;
+		
 		EL_VehicleKeyComponent keyComp = EL_VehicleKeyComponent.Cast(key.FindComponent(EL_VehicleKeyComponent));
-		if (!keyComp)
+		
+		if(keyComp == null)
 			return false;
 
 		return keyComp.GetVehicleIdentifier() == m_sVehicleIdentifier;

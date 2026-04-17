@@ -18,12 +18,30 @@ class EL_VehicleKeyComponent : ScriptComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
+	override void OnPostInit(IEntity owner)
+	{
+		super.OnPostInit(owner);
+		SetEventMask(owner, EntityEvent.INIT);
+	}
+
+	//------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);
-
+		ClearEventMask(owner, EntityEvent.INIT);
 
 		if (m_sDebugIdentifier != "")
 			m_sVehicleIdentifier = m_sDebugIdentifier;
+
+		if (m_sVehicleIdentifier == string.Empty)
+			return;
+
+		InventoryItemComponent invComp = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
+		if (!invComp)
+			return;
+
+		UIInfo uiInfo = invComp.GetUIInfo();
+		if (uiInfo)
+			uiInfo.SetName(string.Format("Vehicle Key [%1]", m_sVehicleIdentifier));
 	}
 }
