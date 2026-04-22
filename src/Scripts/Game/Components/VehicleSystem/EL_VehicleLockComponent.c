@@ -45,10 +45,7 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent
 		if (compartmentSlot && m_pVehicleSpawnProtection && m_pVehicleSpawnProtection.IsProtected(user, compartmentSlot))
 			return false;
 
-		if (!m_bIsLocked)
-			return false;
-
-		return !UserHasValidKey(user);
+		return m_bIsLocked;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -99,10 +96,10 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent
 			return true;
 
 		EL_VehicleLockComponent vehicleLock = EL_VehicleLockComponent.Cast(vehicle.FindComponent(EL_VehicleLockComponent));
-		if (!vehicleLock || !vehicleLock.IsVehicleLocked())
+		if (!vehicleLock)
 			return true;
 
-		return vehicleLock.UserHasValidKey(user);
+		return !vehicleLock.IsVehicleLocked();
 	}
 
 	//------------------------------------------------------------------------------------------------

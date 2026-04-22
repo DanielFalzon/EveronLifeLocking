@@ -10,7 +10,7 @@ modded class SCR_InventoryStorageLootUI : SCR_InventoryStorageBaseUI {
 			if (vehicle)
 			{
 				EL_VehicleLockComponent vehicleLock = EL_VehicleLockComponent.Cast(vehicle.FindComponent(EL_VehicleLockComponent));
-				if (vehicleLock && vehicleLock.IsVehicleLocked() && !vehicleLock.UserHasValidKey(playerEntity))
+				if (vehicleLock && vehicleLock.IsVehicleLocked())
 					return;
 			}
 		}
