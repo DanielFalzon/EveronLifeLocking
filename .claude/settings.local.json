@@ -8,7 +8,8 @@
       "Bash(gh api *)",
       "Bash(gh search *)",
       "WebFetch(domain:reforger.armaplatform.com)",
-      "Read(//c/Users/danfa/Documents/My Games/ArmaReforgerWorkbench/logs/logs_2026-04-18_15-15-41/**)"
+      "Read(//c/Users/danfa/Documents/My Games/ArmaReforgerWorkbench/logs/logs_2026-04-18_15-15-41/**)",
+      "Bash(git ls-tree *)"
     ]
   }
 }

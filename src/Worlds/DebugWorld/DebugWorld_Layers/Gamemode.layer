@@ -12,20 +12,12 @@ EPF_SpawnPoint : "{260C1BEFBF9AA86B}Prefabs/MP/Spawn/SpawnPoint_LIFE.et" {
  coords 110 0 137.516
  angles 0 180 0
 }
-GenericEntity VehicleKey_692D3628EC45BDD8 : "{2C55945E5BAB108E}Prefabs/Items/Keys/VehicleKey.et" {
+GenericEntity VehicleKey_692D362879D9A5D0 : "{2C55945E5BAB108E}Prefabs/Items/Keys/VehicleKey.et" {
  components {
   EL_VehicleKeyComponent "{598779B5FE37ED05}" {
    m_sDebugIdentifier "Test1"
   }
  }
- coords 116.098 -0 143.111
+ coords 112.749 0 142.096
  angles 0 0 0
-}
-Vehicle UAZ452_cargo_FIA1 : "{5F5AAFE8465D9D62}Prefabs/Vehicles/Wheeled/UAZ452/UAZ452_cargo_FIA.et" {
- components {
-  EL_VehicleLockComponent "{691D1854FC9F35B7}" {
-   m_sDebugIdentifier "Test1"
-  }
- }
- coords 114.07 -0 143.746
 }
