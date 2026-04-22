@@ -1,37 +1,28 @@
 modded class SCR_InventoryStorageLootUI : SCR_InventoryStorageBaseUI {
-	
+
 	override void GetAllItems( out notnull array<IEntity> pItemsInStorage, BaseInventoryStorageComponent pStorage = null )
 	{
-		
-		//Create items array
-		array<IEntity> superItems = new array<IEntity>();
-		
-		//Call base method
-		super.GetAllItems(superItems, pStorage);
-		
-		
-		//Get the users entity
 		IEntity playerEntity = GetGame().GetPlayerController().GetControlledEntity();
-		
-		//Check items in storage for visibility
-		foreach(IEntity item : superItems) {
-		
-			
-			//Get the items access control component
-			EL_BaseInventoryStorageAccessControl accessControl = EL_BaseInventoryStorageAccessControl.Cast(item.FindComponent(EL_BaseInventoryStorageAccessControl));
-		
-			//Check if the item has an access control component
-			if (accessControl) {
-			
-				//Check if its locked
-				if (accessControl.IsLocked(playerEntity))
-					continue;
-				
+
+		if (pStorage && playerEntity)
+		{
+			Vehicle vehicle = Vehicle.Cast(SCR_EntityHelper.GetMainParent(pStorage.GetOwner(), true));
+			if (vehicle)
+			{
+				EL_VehicleLockComponent vehicleLock = EL_VehicleLockComponent.Cast(vehicle.FindComponent(EL_VehicleLockComponent));
+				if (vehicleLock && vehicleLock.IsVehicleLocked() && !vehicleLock.UserHasValidKey(playerEntity))
+					return;
 			}
-			
-			//Add the item to the array
+		}
+
+		array<IEntity> superItems = new array<IEntity>();
+		super.GetAllItems(superItems, pStorage);
+
+		foreach(IEntity item : superItems) {
+			EL_BaseInventoryStorageAccessControl accessControl = EL_BaseInventoryStorageAccessControl.Cast(item.FindComponent(EL_BaseInventoryStorageAccessControl));
+			if (accessControl && accessControl.IsLocked(playerEntity))
+				continue;
 			pItemsInStorage.Insert(item);
-		
 		}
 	}
 

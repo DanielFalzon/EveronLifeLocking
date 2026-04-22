@@ -8,25 +8,24 @@ EL_GameModeRoleplay : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Role
 GenericEntity Backpack_ALICE_Medium_691F1CD4E66993FF : "{06B68C58B72EAAC6}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium.et" {
  coords 104.243 0 138.794
 }
-Vehicle UAZ1 : "{259EE7B78C51B624}Prefabs/Vehicles/Wheeled/UAZ469/UAZ469.et" {
- components {
-  EL_VehicleLockComponent "{691D1854FC9F35B7}" {
-   m_bIsLocked 1
-   m_sDebugIdentifier "Test1"
-  }
- }
- coords 107.687 0 143.052
-}
 EPF_SpawnPoint : "{260C1BEFBF9AA86B}Prefabs/MP/Spawn/SpawnPoint_LIFE.et" {
  coords 110 0 137.516
  angles 0 180 0
 }
-GenericEntity VehicleKey_69235799B851CECE : "{2C55945E5BAB108E}Prefabs/Items/Keys/VehicleKey.et" {
+GenericEntity VehicleKey_692D3628EC45BDD8 : "{2C55945E5BAB108E}Prefabs/Items/Keys/VehicleKey.et" {
  components {
   EL_VehicleKeyComponent "{598779B5FE37ED05}" {
    m_sDebugIdentifier "Test1"
   }
  }
- coords 104.934 -0 137.411
+ coords 116.098 -0 143.111
  angles 0 0 0
+}
+Vehicle UAZ452_cargo_FIA1 : "{5F5AAFE8465D9D62}Prefabs/Vehicles/Wheeled/UAZ452/UAZ452_cargo_FIA.et" {
+ components {
+  EL_VehicleLockComponent "{691D1854FC9F35B7}" {
+   m_sDebugIdentifier "Test1"
+  }
+ }
+ coords 114.07 -0 143.746
 }

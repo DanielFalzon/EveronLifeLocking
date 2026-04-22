@@ -39,38 +39,16 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent
 	//------------------------------------------------------------------------------------------------
 	override bool IsLocked(IEntity user, BaseCompartmentSlot compartmentSlot)
 	{
-		CharacterControllerComponent characterController = CharacterControllerComponent.Cast(user.FindComponent(CharacterControllerComponent));
-		
-		IEntity	m_AttachedGadgetAtLeft = characterController.GetAttachedGadgetAtLeftHandSlot();
-		
-		if (characterController && (m_AttachedGadgetAtLeft != null))
-			return !IsValidKey(m_AttachedGadgetAtLeft);
-
-		SCR_InventoryStorageManagerComponent inventoryManager = SCR_InventoryStorageManagerComponent.Cast(user.FindComponent(SCR_InventoryStorageManagerComponent));
-		
-		if (!inventoryManager)
+		if (!user)
 			return true;
 
-		array<IEntity> inventoryItems();
-		inventoryManager.GetItems(inventoryItems);
-
-		foreach (IEntity item : inventoryItems)
-		{
-			if (IsValidKey(item))
-				return false;
-		}
-
-		// Spawn protection always takes precedence
 		if (compartmentSlot && m_pVehicleSpawnProtection && m_pVehicleSpawnProtection.IsProtected(user, compartmentSlot))
-			return true;
+			return false;
 
 		if (!m_bIsLocked)
 			return false;
 
-		if (!user)
-			return true;
-
-		return true;
+		return !UserHasValidKey(user);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -85,6 +63,46 @@ class EL_VehicleLockComponent : SCR_BaseLockComponent
 			return false;
 
 		return keyComp.GetVehicleIdentifier() == m_sVehicleIdentifier;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	bool UserHasValidKey(IEntity user)
+	{
+		CharacterControllerComponent characterController = CharacterControllerComponent.Cast(user.FindComponent(CharacterControllerComponent));
+		if (characterController && IsValidKey(characterController.GetAttachedGadgetAtLeftHandSlot()))
+			return true;
+
+		SCR_InventoryStorageManagerComponent inventoryManager = SCR_InventoryStorageManagerComponent.Cast(user.FindComponent(SCR_InventoryStorageManagerComponent));
+		if (!inventoryManager)
+			return false;
+
+		array<IEntity> inventoryItems();
+		inventoryManager.GetItems(inventoryItems);
+
+		foreach (IEntity item : inventoryItems)
+		{
+			if (IsValidKey(item))
+				return true;
+		}
+
+		return false;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool CheckCanInteract(IEntity owner, IEntity user)
+	{
+		if (!owner || !user)
+			return true;
+
+		Vehicle vehicle = Vehicle.Cast(SCR_EntityHelper.GetMainParent(owner, true));
+		if (!vehicle)
+			return true;
+
+		EL_VehicleLockComponent vehicleLock = EL_VehicleLockComponent.Cast(vehicle.FindComponent(EL_VehicleLockComponent));
+		if (!vehicleLock || !vehicleLock.IsVehicleLocked())
+			return true;
+
+		return vehicleLock.UserHasValidKey(user);
 	}
 
 	//------------------------------------------------------------------------------------------------
